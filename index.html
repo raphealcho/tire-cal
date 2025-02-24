@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>차량 적정 공기압 계산기</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 500px; margin: auto; }
+        label, input { display: block; margin-bottom: 10px; }
+        input { width: 100%; padding: 8px; }
+        .result { margin-top: 20px; padding: 10px; background: #f8f8f8; }
+        .link-button { display: block; margin-top: 10px; padding: 10px; background-color: #007bff; color: white; text-align: center; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>차량 적정 공기압 계산기</h2>
+        <label>차량 무게 (kg):</label>
+        <input type="number" id="carWeight" value="1500">
+        
+        <label>적재량 (kg):</label>
+        <input type="number" id="loadWeight" value="200">
+        
+        <label>현재 공기압 (psi):</label>
+        <input type="number" id="currentPressure" value="32">
+        
+        <label>계절 선택:</label>
+        <select id="season">
+            <option value="summer">여름</option>
+            <option value="winter">겨울</option>
+        </select>
+        
+        <button onclick="calculatePressure()">계산하기</button>
+        
+        <div class="result" id="result"></div>
+        
+        <a href="https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50003433&frm=NVSCPRO&h=b41b0dc27a6f0cd278ecd1f1d20409a59c90696a&nv_mid=88991509548&query=%ED%9E%88%EC%98%A4%ED%82%A4+%EB%94%94%EC%A7%80%ED%84%B8%EC%A0%88%EC%97%B0%EC%A0%80%ED%95%AD%EA%B3%84+%EC%A0%91%EC%A7%80%EC%A0%80%ED%95%AD&t=M7ISWIME" class="link-button" target="_blank">행운 상품 보러가기</a>
+    </div>
+
+    <script>
+        function calculatePressure() {
+            let carWeight = Number(document.getElementById('carWeight').value);
+            let loadWeight = Number(document.getElementById('loadWeight').value);
+            let currentPressure = Number(document.getElementById('currentPressure').value);
+            let season = document.getElementById('season').value;
+            
+            let basePressure = 30 + (carWeight + loadWeight) / 500;
+            
+            if (season === "winter") {
+                basePressure += 2; 
+            }
+            
+            document.getElementById('result').innerHTML = `
+                <h3>적정 공기압 계산 결과</h3>
+                <p><strong>권장 공기압:</strong> ${basePressure.toFixed(1)} psi</p>
+                <p><strong>현재 공기압:</strong> ${currentPressure} psi</p>
+                <p>${currentPressure < basePressure ? '공기압을 보충하는 것이 좋습니다.' : '공기압이 적정 수준입니다.'}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

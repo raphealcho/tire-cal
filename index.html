@@ -35,7 +35,7 @@
         
         <div class="result" id="result"></div>
         
-        <a href="https://cr3.shopping.naver.com/v2/bridge/searchGate?cat_id=50003433&frm=NVSCPRO&h=b41b0dc27a6f0cd278ecd1f1d20409a59c90696a&nv_mid=88991509548&query=%ED%9E%88%EC%98%A4%ED%82%A4+%EB%94%94%EC%A7%80%ED%84%B8%EC%A0%88%EC%97%B0%EC%A0%80%ED%95%AD%EA%B3%84+%EC%A0%91%EC%A7%80%EC%A0%80%ED%95%AD&t=M7ISWIME" class="link-button" target="_blank">행운 상품 보러가기</a>
+        <a id="dynamicLink" class="link-button" target="_blank">행운 상품 보러가기</a>
     </div>
 
     <script>
@@ -57,7 +57,18 @@
                 <p><strong>현재 공기압:</strong> ${currentPressure} psi</p>
                 <p>${currentPressure < basePressure ? '공기압을 보충하는 것이 좋습니다.' : '공기압이 적정 수준입니다.'}</p>
             `;
+
+            updateLink();
         }
+
+        function updateLink() {
+            let currentTime = new Date().getTime();
+            let dynamicUrl = `https://search.naver.com/p/crd/rd?m=1&px=661&py=223&sx=661&sy=223&vw=1920&vh=911&bw=672&bh=338&bx=261&by=70&p=iJ3OXdqX5E0ssB2CQ7Gssssst2G-169848&q=%EA%B3%B5%EA%B5%AC%EB%8B%A4%EC%9D%B4+%EA%B3%B5%EA%B5%AC%EA%B1%B8%EC%9D%B4%EB%8C%80+%EC%9D%B4%EB%8F%99%EC%8B%9D+%EA%B3%B5%EA%B5%AC+SM17&ie=utf8&rev=1&ssc=tab.nx.all&f=nexearch&w=nexearch&s=kj4lBy7Jtg3Oo7QPlhkwcw%3D%3D&time=${currentTime}&u=https%3A%2F%2Fcr3.shopping.naver.com%2Fv2%2Fbridge%2FsearchGate%3Fcat_id%3D50003388%26frm%3DNVSCPRO%26h%3D480c236f76391d3ca7cd8abd155d99d3b40b3855%26nv_mid%3D89042777806%26query%3D%25EA%25B3%25B5%25EA%25B5%25AC%25EB%258B%25A4%25EC%259D%25B4%2B%25EA%25B3%25B5%25EA%25B5%25AC%25EA%25B1%25B8%25EC%259D%25B4%25EB%258C%2580%2B%25EC%259D%25B4%25EB%258F%2599%25EC%258B%259D%2B%25EA%25B3%25B5%25EA%25B5%25AC%2BSM17%26t%3DM7KMKEL7&r=1&i=00000009_0014bb5cf6ce&a=shp_dui*a.outtit&cr=1`;
+            document.getElementById('dynamicLink').href = dynamicUrl;
+        }
+
+        // 페이지 로드 시 초기 링크 설정
+        updateLink();
     </script>
 </body>
 </html>
